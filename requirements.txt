@@ -1,6 +1,7 @@
 certifi==2021.10.8
 charset-normalizer==2.0.12
 idna==3.3
+mysqlclient==2.1.0
 numpy==1.22.3
 opencv-python==4.5.5.64
 python-dotenv==0.20.0
