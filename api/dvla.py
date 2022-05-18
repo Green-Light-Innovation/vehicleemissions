@@ -3,13 +3,13 @@ import os
 import dotenv
 import json
 
-dotenv.load_dotenv()
+from config import config
 
 def search_plate_number(plate_number:str) -> dict:
     """ Returns dictionary of car information """
 
     URL = "https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry/v1/vehicles"
-    API_KEY = os.getenv("DVLA_API_KEY")
+    API_KEY = config["DVLA_API_TOKEN"] # Get DVLA API key from config file
 
     response = requests.post(
         url = URL,
