@@ -1,0 +1,9 @@
+{
+    "DVLA_API_TOKEN": "",
+    "ANPR_API_TOKEN": "",
+
+    "DATABASE_SERVER": "",
+    "DATABASE_PORT": 3306,
+    "DATABASE_USER": "",
+    "DATABASE_PASSWORD": ""
+}
