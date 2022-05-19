@@ -43,7 +43,7 @@ class DatabaseEngine:
     @staticmethod
     def gen_id() -> str:
         """ Generate a unique ID """
-        # A unique ID consists of 16 randomly selected upper/lowecase letters and numbers
+        # A unique ID consists of 32 randomly selected upper/lowecase letters and numbers
 
         ID = ""
         for x in range(32):
