@@ -6,13 +6,14 @@ class CarLocation:
     def load_from_database(ID:int) -> object:
         """ Create a new CarLocation object using data loaded from the database """
         
-        query = "SELECT * FROM CarLocations WHERE ID = ?;" # SQL query executed on the database
+        query = "SELECT * FROM CarLocations WHERE ID = %s;" # SQL query executed on the database
 
         DatabaseEngine.connect() # Connect to the database
 
         # Fetch data from the database using the ID parameter
         # Only one item should be returned so the fetchone() function is used
-        data = DatabaseEngine.cursor.execute(query, (ID,)).fetchone()
+        DatabaseEngine.cursor.execute(query, (ID,))
+        data = DatabaseEngine.cursor.fetchone()
         DatabaseEngine.disconnect() # Disconnect from the database
 
         if not data: return None # If no data could be found, return None object
@@ -41,7 +42,7 @@ class CarLocation:
         # SQL query to insert new record into CarLocations table
         query = """
         INSERT INTO CarLocations (ID, lat, lon, location_name, facing)
-        VALUES (?, ?, ?, ?, ?);
+        VALUES (%s, %s, %s, %s, %s);
         """
 
         DatabaseEngine.connect() # Connect to the database

@@ -7,10 +7,11 @@ class Car:
 
     @staticmethod
     def load_from_database(plate:str) -> object:
-        query = "SELECT * FROM Cars WHERE plate = ?"
+        query = "SELECT * FROM Cars WHERE plate = %s"
         
         DatabaseEngine.connect()
-        data = DatabaseEngine.cursor.execute(query, (plate,)).fetchone()
+        DatabaseEngine.cursor.execute(query, (plate,))
+        data = DatabaseEngine.cursor.fetchone()
         DatabaseEngine.disconnect()
 
         if not data: return # Return None if no car is found
@@ -88,7 +89,7 @@ class Car:
         # SQL query to insert new record into Cars table
         query = """
         INSERT INTO Cars (ID, plate, recorded_datetime, make, manufacture_year, emissions, fuel_type, car_location)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
         """
 
         DatabaseEngine.connect() # Connect to the database

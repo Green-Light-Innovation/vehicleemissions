@@ -58,7 +58,8 @@ class DatabaseEngine:
         query = "SELECT ID FROM %s WHERE ID = %s;" # SQL query
         
         DatabaseEngine.connect() # Connect to the database
-        data = DatabaseEngine.cursor.execute(query, (table, ID)).fetchone() # Execute the query and fetch one record
+        DatabaseEngine.cursor.execute(query, (table, ID)) # Execute the query and fetch one record
+        data = DatabaseEngine.cursor.fetchone()
         DatabaseEngine.disconnect()
 
         if not data: return False # Return false if no data is found

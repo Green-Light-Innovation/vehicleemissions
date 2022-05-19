@@ -1,23 +1,20 @@
 -- The cars table stores all of the information on a car collected using the DLVA VES API
-CREATE TABLE Cars
-(
-    ID TEXT,
-    plate TEXT, -- License plate number
-    recorded_datetime INT, -- Date and time plate was recorded UNIX TIME
-    make TEXT, -- make of car
-    manufacture_year INT, -- Year of manufacture UNIX TIME
-    emissions REAL, -- Emissions g/km
-    fuel_type TEXT, -- Car fuel type
-    car_location INT, -- Foreign Key of CarLocations record
-    FOREIGN KEY (car_location) REFERENCES CarLocations(ID) 
-);
+CREATE TABLE `Cars` (
+  `ID` VARCHAR(32) NOT NULL,
+  `plate` VARCHAR(16) NULL,
+  `recorded_datetime` INT UNSIGNED NULL,
+  `make` VARCHAR(255) NULL,
+  `manufacture_year` INT UNSIGNED NULL,
+  `emissions` REAL UNSIGNED NULL,
+  `fuel_type` VARCHAR(255) NULL,
+  `car_location` VARCHAR(32) NULL,
+  PRIMARY KEY (`ID`));
 
 -- The location table stores geographical locations of where the data was collected from
-CREATE TABLE CarLocations
-(
-    ID TEXT, 
-    lat REAL, -- Location Latitude
-    lon REAL, -- Location Longitude
-    location_name TEXT, -- Name of location (street name)
-    facing TEXT -- Direction camera is facing (N,E,S,W)
-);
+CREATE TABLE `CarLocations` (
+  `ID` VARCHAR(32) NOT NULL,
+  `lat` FLOAT NULL,
+  `lon` FLOAT NULL,
+  `location_name` VARCHAR(255) NULL,
+  `facing` VARCHAR(2) NULL,
+  PRIMARY KEY (`ID`));
