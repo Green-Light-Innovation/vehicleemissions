@@ -55,7 +55,7 @@ class DatabaseEngine:
     def id_exists(table:str, ID:str) -> bool:
         """ Check if ID already exists in a table """
         
-        query = "SELECT ID FROM ? WHERE ID = ?;" # SQL query
+        query = "SELECT ID FROM %s WHERE ID = %s;" # SQL query
         
         DatabaseEngine.connect() # Connect to the database
         data = DatabaseEngine.cursor.execute(query, (table, ID)).fetchone() # Execute the query and fetch one record
