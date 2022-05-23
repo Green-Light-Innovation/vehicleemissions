@@ -18,3 +18,9 @@ CREATE TABLE `CarLocations` (
   `location_name` VARCHAR(255) NULL,
   `facing` VARCHAR(2) NULL,
   PRIMARY KEY (`ID`));
+
+CREATE TABLE `NodeConfig` (
+  `ID` VARCHAR(32),
+  `location_id` VARCHAR(32),
+  `friendly_name` VARCHAR(32)
+);
