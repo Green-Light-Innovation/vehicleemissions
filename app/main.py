@@ -38,7 +38,7 @@ def run() -> None:
         data = api.dvla.search_plate_number(plate)
         # If no data was found go back to the start of the loop
         if not data: 
-            print("ERROR: Plate could not be found")
+            print(f"ERROR: Plate [ {plate} ] could not be found")
             continue
 
         # Get car data and save to database
