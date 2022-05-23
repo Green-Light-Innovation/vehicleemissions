@@ -1,2 +1,2 @@
-import app.configure
-app.configure.run()
+import app.main
+app.main.run()

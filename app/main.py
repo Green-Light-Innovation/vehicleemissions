@@ -1,14 +1,20 @@
 import cv2 as cv
 import time
 import datetime
+import serialnum
 
 import api.anpr
 import api.dvla
 
 from database.objects.carlocation import CarLocation
 from database.objects.car import Car
+from database.objects.nodeconfig import NodeConfig
 
-def run(location:CarLocation) -> None:
+def run() -> None:
+
+    # Get node
+    node = NodeConfig.load_from_database(serialnum.get())
+    location = node.get_location()
 
     cam = cv.VideoCapture(0)
 
