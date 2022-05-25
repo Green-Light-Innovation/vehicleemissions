@@ -19,8 +19,10 @@ def run() -> None:
     cam = cv.VideoCapture(0)
 
     while True:
-        
+
+        node.check_in()
         node.check_if_active()
+        
         if node.is_active():
             time.sleep(1)
 
