@@ -5,18 +5,28 @@
 import sys
 import os
 
+def get_os() -> str:
+    if "win" in sys.platform.lower():
+        return "windows"
+
+    elif "linux" in sys.platform.lower():
+        return "linux"
+
+    elif "darwin" in sys.platform.lower():
+        return "darwin"
+
 def get() -> str:
 
     # Get the device's operating system
 
-    if "win" in sys.platform.lower():
+    if get_os() == "windows":
         command = "wmic bios get serialnumber"
         return os.popen(command).read().split("\n")[2].strip(" ")
 
-    elif "linux" in sys.platform.lower():
+    elif get_os() == "linux":
         command = "cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2"
         return os.popen(command).read().strip("\n")
 
-    elif "darwin" in sys.platform.lower():
+    elif get_os() == "darwin":
         command = "ioreg -l | grep IOPlatformSerialNumber"
         return os.popen(command).read().split("\"")[3]
