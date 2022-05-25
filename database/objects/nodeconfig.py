@@ -14,7 +14,7 @@ class NodeConfig:
         DatabaseEngine.connect()
         DatabaseEngine.cursor.execute(query, (ID,))
         data = DatabaseEngine.cursor.fetchone()
-        DatabaseEngine.disconnect
+        DatabaseEngine.disconnect()
 
         if not data:
             # Create new node object and put it in the database
