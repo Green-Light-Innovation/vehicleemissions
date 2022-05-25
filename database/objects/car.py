@@ -69,9 +69,16 @@ class Car:
 
     def is_recorded(self) -> bool:
         """ Checks if the plate has been recorded previously in the data base within the last 5 minutes """
-        car = Car.load_from_database(self.__plate)
         
-        if not car: return False # if no record was found, return false
+        query = "SELECT * FROM Cars WHERE plate = %s ORDER BY recorded_datetime DESC;"
+        DatabaseEngine.connect()
+        DatabaseEngine.cursor.execute(query, (self.__plate,))
+        data = DatabaseEngine.cursor.fetchone()
+        DatabaseEngine.disconnect()
+
+        if not data: return False
+        
+        car = Car(*data)
 
         # check if previously recorded car has been recorded at least 5 minutes
         # before being recorded again
