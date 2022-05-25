@@ -24,6 +24,14 @@ def run() -> None:
 
         # Capture image from webcam
         ret, image = cam.read()
+
+        # If the software is running on the pi, flip the webcam image upsidown
+        # This is done because the camera is mounted upsidown
+        if serialnum.get_os() == "linux":
+            image = cv.flip(image, 0)
+            image = cv.flip(image, 1)
+
+
         success, image_buffer = cv.imencode('.jpg', image)
         image_bytes = image_buffer.tobytes()
 
