@@ -34,7 +34,8 @@ class NodeConfig:
             sernum,
             "",
             name,
-            1
+            1,
+            0
         )
 
         # Save node to the database
@@ -43,18 +44,20 @@ class NodeConfig:
         return node
 
 
-    def __init__(self, ID:str, location_id:str, friendly_name:str, active:int):
+    def __init__(self, ID:str, location_id:str, friendly_name:str, active:int, check_in_time:int):
 
         self.__ID = ID
         self.__location_id = location_id
         self.__friendly_name = friendly_name
         self.__active = bool(active)
+        self.__check_in_time = check_in_time
 
     # Getters
     def get_ID(self) -> str: return self.__ID
     def get_location_id(self) -> str: return self.__location_id
     def get_friendly_name(self) -> str: return self.__friendly_name
     def is_active(self) -> bool: return self.__active
+    def get_check_in_time(self) -> int: return self.__check_in_time
 
     def __update_location_id(self) -> str:
         """ Update location_id from the database """
@@ -111,3 +114,15 @@ class NodeConfig:
         DatabaseEngine.disconnect()
 
         self.__active = bool(int(data))
+
+    def check_in(self) -> None:
+        """ Check into the database to tell the system that the node is still online """
+
+        query = "UPDATE NodeConfig SET check_in_time = %s WHERE ID = %s;"
+        DatabaseEngine.connect()
+        DatabaseEngine.cursor.execute(query, (
+            time.mktime(datetime.now().timetuple()),
+            self.__ID
+        ))
+        DatabaseEngine.commit()
+        DatabaseEngine.disconnect()
