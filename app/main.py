@@ -2,6 +2,7 @@ import cv2 as cv
 import time
 import datetime
 import serialnum
+import network
 
 import api.anpr
 import api.dvla
@@ -12,6 +13,8 @@ from database.objects.nodeconfig import NodeConfig
 
 def run() -> None:
 
+    network.wait_for_connection()
+
     # Get node
     node = NodeConfig.load_from_database(serialnum.get())
     location = node.get_location()
@@ -19,6 +22,8 @@ def run() -> None:
     cam = cv.VideoCapture(0)
 
     while True:
+
+        network.wait_for_connection()
 
         node.check_in()
         node.check_if_active()
